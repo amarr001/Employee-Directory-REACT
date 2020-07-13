@@ -1,16 +1,18 @@
 import React from "react";
 import "./style.css";
 
-function SearchResults(props) {
-  return (
-    <ul className="list-group search-results">
-      {props.results.map(result => (
-        <li key={result} className="list-group-item">
-          <img alt="Dog" src={result} className="img-fluid" />
-        </li>
-      ))}
-    </ul>
-  );
+class SearchResults extends React.Component {
+  render() {
+      return (
+          <div className="row mb-2">
+              <div className="col-md-2"><img alt="User" src={this.props.picture}></img></div>
+              <div className="col-md-2"><h5>{this.props.firstname}</h5></div>
+              <div className="col-md-2"><h5>{this.props.lastname}</h5></div>
+              <div className="col-md-2"><p>{this.props.email}</p></div>
+          </div>
+      )
+  }
 }
+
 
 export default SearchResults;

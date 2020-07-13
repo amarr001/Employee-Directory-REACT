@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import SearchResults from "../components/SearchResults";
+
 
 
 class Discover extends Component {
   state = {
-    result: []
+    results: []
   };
 
   // When the component mounts, load the next dog to be displayed
@@ -14,10 +16,11 @@ class Discover extends Component {
 
   loadEmployees = () => {
     API.getRandomEmployee()
-      .then(res =>
-        this.setState({
-          result: res.data.message
-        })
+      .then(res => { this.setState({
+        results: res.data.results
+      })
+      console.log(this.state.results);}
+       
       )
       .catch(err => console.log(err));
   };
@@ -26,7 +29,11 @@ class Discover extends Component {
     return (
       <div>
         <h1 className="text-center">Meet our best people</h1>
-       <div>{this.state.result}</div>
+        <ul>
+          {this.state.results.map(({ picture, name, email}) => (
+                <SearchResults picture={picture.thumbnail} firstname={name.first} lastname={name.last} email={email} />
+            ))}
+        </ul>
     
       </div>
     );
