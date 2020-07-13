@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-class SearchResults extends React.Component {
+class List extends React.Component {
   render() {
       return (
           <div className="row mb-2">
@@ -15,4 +15,4 @@ class SearchResults extends React.Component {
 }
 
 
-export default SearchResults;
+export default List;
