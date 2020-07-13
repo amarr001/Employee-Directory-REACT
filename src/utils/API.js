@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default {
   getRandomEmployee: function() {
-    return axios.get("https://randomuser.me/api/?results=5000");
+    return axios.get("https://randomuser.me/api/?results=20");
   },
   getNames: function(name) {
     return axios.get("https://randomuser.me/api/?inc=" + name );

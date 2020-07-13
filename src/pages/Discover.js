@@ -1,26 +1,33 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import Card from "../components/Card";
+
 
 class Discover extends Component {
   state = {
-    picture: ""
+    result: []
   };
 
   // When the component mounts, load the next dog to be displayed
   componentDidMount() {
-    this.loadEmployess()
+    this.loadEmployees()
   }
 
-  loadEmployess = () => {
-    API.getRandomEmployee();
-  }
+  loadEmployees = () => {
+    API.getRandomEmployee()
+      .then(res =>
+        this.setState({
+          result: res.data.message
+        })
+      )
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
       <div>
         <h1 className="text-center">Meet our best people</h1>
-        <Card picture={this.state.picture} />
+       <div>{this.state.result}</div>
+    
       </div>
     );
   }
