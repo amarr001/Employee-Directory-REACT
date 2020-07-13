@@ -1,6 +1,7 @@
 # Employee-Directory-REACT
 
-[Click here to view deployed application](https://dashboard.heroku.com/apps/employee-react-hw19)
+[Click here to view deployed application](https://amarr001.github.io/Employee-Directory-REACT/
+)
 
 ## Overview
 
