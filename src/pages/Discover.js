@@ -1,41 +1,71 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import List from "../components/List";
-
-
+import Container from "../components/Container";
+import SearchForm from "../components/SearchForm";
+let allEmployees = [];
 
 class Discover extends Component {
   state = {
-    results: []
+    results: [],
+    search: ""
   };
 
   componentDidMount() {
-    this.loadEmployees()
+    this.loadEmployees();
   }
 
   loadEmployees = () => {
     API.getRandomEmployee()
-      .then(res => { this.setState({
-        results: res.data.results
+      .then((res) => {
+        this.setState({
+          results: res.data.results,
+        });
+
+        allEmployees = [...res.data.results]; // Creating a copy of the results array using the spread operator
+
+        console.log(allEmployees);
+        console.log(this.state.results);
       })
-      console.log(this.state.results);} 
-      )
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
+
+  handleInputChange = event => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    let searchEmployee = [...allEmployees].filter(employee => employee.name.first === this.state.search);
+    this.setState({results: searchEmployee});
+    console.log(searchEmployee);
+  }
+
 
   render() {
     return (
       <div>
         <h1 className="text-center my-4">Meet our best people</h1>
+        <Container style={{ minHeight: "80%" }}>
+          <h1 className="text-center"></h1>
+          <SearchForm
+            value={this.state.search}
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+          />
+        </Container>
         <ul>
-          {this.state.results.map(({ picture, name, email}) => (
-          <List picture={picture.thumbnail} 
-            firstname={name.first} 
-            lastname={name.last} 
-            email={email} />
-            ))}
+          {this.state.results.map(({ picture, name, email }) => (
+            <li>
+            <List
+              picture={picture.thumbnail}
+              firstname={name.first}
+              lastname={name.last}
+              email={email}
+            />
+            </li>
+          ))}
         </ul>
-    
       </div>
     );
   }
