@@ -38,9 +38,7 @@ class Discover extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     let searchEmployeebyFirstName = [...allEmployees].filter(employee => employee.name.first === this.state.search)
-    if(searchEmployeebyFirstName) {
     this.setState({results: searchEmployeebyFirstName})
-  } alert("There are no employees with this name");
   }
 
 
