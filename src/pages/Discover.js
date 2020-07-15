@@ -22,7 +22,8 @@ class Discover extends Component {
           results: res.data.results,
         });
 
-        allEmployees = [...res.data.results]; // Creating a copy of the results array using the spread operator
+        // Creating a copy of the results array using the spread operator
+        allEmployees = [...res.data.results]; 
 
         console.log(allEmployees);
         console.log(this.state.results);
@@ -36,9 +37,10 @@ class Discover extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    let searchEmployee = [...allEmployees].filter(employee => employee.name.first === this.state.search);
-    this.setState({results: searchEmployee});
-    console.log(searchEmployee);
+    let searchEmployeebyFirstName = [...allEmployees].filter(employee => employee.name.first === this.state.search)
+    if(searchEmployeebyFirstName) {
+    this.setState({results: searchEmployeebyFirstName})
+  } alert("There are no employees with this name");
   }
 
 

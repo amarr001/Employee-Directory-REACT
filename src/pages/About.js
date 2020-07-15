@@ -4,7 +4,9 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
 
+
 function About() {
+
   return (
     <div>
       <Hero backgroundImage="https://image.freepik.com/free-vector/flat-multiracial-group-people_52683-19067.jpg">
