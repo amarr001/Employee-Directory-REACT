@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
-import List from "../components/List";
+import SearchResults from '../components/SearchResults';
+
 
 
 class Search extends Component {
   state = {
     search: "",
-    names: [],
     results: [],
     error: ""
   };
 
-  // When the component mounts, get a list of all available base breeds and update this.state.breeds
 
   handleInputChange = event => {
     this.setState({ search: event.target.value });
@@ -24,9 +23,9 @@ class Search extends Component {
     API.getNames(this.state.search)
       .then(res => {
         if (res.data.status === "error") {
-          throw new Error(res.data.message);
+          throw new Error(res.data.results);
         }
-        this.setState({ results: res.data.message, error: "" });
+        this.setState({ results: res.data.results, error: "" });
       })
       .catch(err => this.setState({ error: err.message }));
   };
@@ -36,13 +35,20 @@ class Search extends Component {
         <Container style={{ minHeight: "80%" }}>
           <h1 className="text-center">Search By Name!</h1>
           <SearchForm
+            value={this.state.search}
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
-            names={this.state.names}
           />
-          <List results={this.state.results} />
+          <ul>
+          {this.state.results.map(({ picture, name, email}) => (
+          <SearchResults picture={picture.thumbnail} 
+            firstname={name.first} 
+            lastname={name.last} 
+            email={email} />
+            ))}
+        </ul>
         </Container>
-      </div>
+        </div>
     );
   }
 }
